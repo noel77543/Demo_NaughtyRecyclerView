@@ -83,6 +83,13 @@ public class ReLoadingView extends RelativeLayout {
         imgLoading.setBackgroundResource(R.drawable.shape_loading);
         imgLoading.setId(R.id.id_image_loading);
         addView(imgLoading);
+
+        animation = new RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        animation.setDuration(ANIMATION_DURATION);
+        animation.setRepeatCount(Animation.INFINITE);
+        animation.setInterpolator(new LinearInterpolator());
+
+
     }
     //-------------
 
@@ -138,12 +145,7 @@ public class ReLoadingView extends RelativeLayout {
      *  開始轉圈動畫
      */
     public void startLoading() {
-        animation = new RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        animation.setDuration(ANIMATION_DURATION);
-        animation.setRepeatCount(Animation.INFINITE);
-        animation.setInterpolator(new LinearInterpolator());
         imgLoading.setAnimation(animation);
-
         animation.startNow();
         handler.postDelayed(runnable, DURATION);
     }
@@ -160,10 +162,20 @@ public class ReLoadingView extends RelativeLayout {
     //--------------------
 
     /***
-     *  在拖拉時 旋轉
+     *  在拖拉時  逆時針旋轉
      */
-    public void rotateImgLoading() {
+    public void rotateCounterClockWise() {
         imgLoading.setRotation(rotateAngle);
-        rotateAngle -= 3;
+        rotateAngle -= 5;
+    }
+
+    //--------------------
+
+    /***
+     *  在拖拉時  順時針旋轉
+     */
+    public void rotateClockWise() {
+        imgLoading.setRotation(rotateAngle);
+        rotateAngle +=5;
     }
 }
